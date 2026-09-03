@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Image Resizer & Compressor | Pixizer</title>
+    <meta name="description" content="Resize your images by pixels, cm, mm, inch, or percentage. Compress JPG, PNG, and WEBP files perfectly without losing quality.">
+    <link rel="stylesheet" href="/style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Pixizer</h2>
+            <button class="close-btn" id="closeSidebar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-label">Tools</li>
+            <li><a href="/image-resizer/" class="active"><i class="fa-solid fa-crop-simple"></i> Image Resizer</a></li>
+            <li><a href="#"><i class="fa-solid fa-file-image"></i> Image Converter (Soon)</a></li>
+            <li><a href="#"><i class="fa-solid fa-compress"></i> Bulk Compressor (Soon)</a></li>
+            
+            <li class="nav-label mt-auto">Legal & Info</li>
+            <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#"><i class="fa-solid fa-circle-info"></i> About Us</a></li>
+            <li><a href="#"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a></li>
+            <li><a href="#"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Top Header for Mobile & Desktop -->
+        <header class="top-header">
+            <button class="menu-btn" id="openSidebar"><i class="fa-solid fa-bars"></i></button>
+            <div class="header-title">Image Resizer</div>
+        </header>
+
+        <!-- Top Ad Slot -->
+        <div class="ad-container top-ad">
+            <div class="ad-placeholder">AdSense Top Banner (728x90)</div>
+        </div>
+
+        <!-- Tool Section -->
+        <section class="tool-wrapper">
+            <div class="hero-text">
+                <h1>Smart Image Resizer</h1>
+                <p>Resize by pixels, cm, mm, inch, or percentage. Compress and format instantly.</p>
+            </div>
+
+            <div class="tool-container">
+                <!-- Left: Controls -->
+                <div class="tool-controls">
+                    
+                    <div class="form-group">
+                        <label>Resize Setting</label>
+                        <select id="resizeMode">
+                            <option value="dimensions">By Size (Dimensions)</option>
+                            <option value="percentage">As Percentage (%)</option>
+                        </select>
+                    </div>
+
+                    <!-- DIMENSIONS BLOCK -->
+                    <div id="dimensionsBlock">
+                        <div class="input-row">
+                            <div class="form-group" style="flex: 2;">
+                                <label>Quick Presets</label>
+                                <select id="preset">
+                                    <option value="custom">Custom</option>
+                                    <option value="social">Social Post (1080x1080 px)</option>
+                                    <option value="hd">HD Web (1280x720 px)</option>
+                                    <option value="exam">Passport/Exam (200x230 px)</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Unit</label>
+                                <select id="unitSelect">
+                                    <option value="px">px</option>
+                                    <option value="cm">cm</option>
+                                    <option value="mm">mm</option>
+                                    <option value="inch">inch</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-row">
+                            <div class="form-group">
+                                <label>Width</label>
+                                <input type="number" id="width" value="1080" step="any">
+                            </div>
+                            <div class="form-group">
+                                <label>Height</label>
+                                <input type="number" id="height" value="1080" step="any">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PERCENTAGE BLOCK (Hidden by default) -->
+                    <div id="percentageBlock" class="hidden">
+                        <div class="form-group">
+                            <label>Scale Image By (%)</label>
+                            <input type="number" id="percentageValue" value="50" min="1" max="500">
+                            <small style="color: #64748b; font-size: 0.75rem; margin-top: 5px; display: block;">E.g. 50% makes the image half the size, 200% doubles it.</small>
+                        </div>
+                    </div>
+
+                    <!-- Output Settings (Applies to both modes) -->
+                    <div class="input-row" style="margin-top: 15px;">
+                        <div class="form-group">
+                            <label>Max Size (KB)</label>
+                            <input type="number" id="maxKb" value="500">
+                        </div>
+                        <div class="form-group">
+                            <label>Format</label>
+                            <select id="outputFormat">
+                                <option value="image/jpeg">JPG / JPEG</option>
+                                <option value="image/png">PNG</option>
+                                <option value="image/webp">WEBP</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label class="upload-btn">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Select Image
+                            <input type="file" id="imageInput" accept="image/*" hidden>
+                        </label>
+                        <p class="file-name" id="fileName">No file chosen</p>
+                    </div>
+
+                    <button class="primary-btn" id="processBtn">Process Image</button>
+                </div>
+
+                <!-- Right: Preview -->
+                <div class="tool-preview">
+                    <div class="preview-placeholder" id="previewPlaceholder">
+                        <i class="fa-regular fa-image"></i>
+                        <p>Your processed image will appear here</p>
+                    </div>
+
+                    <div class="preview-result hidden" id="previewResult">
+                        <div class="image-box">
+                            <img id="outputImage" src="" alt="Processed Preview">
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <span>Size</span>
+                                <strong id="finalKb">0 KB</strong>
+                            </div>
+                            <div class="stat-box">
+                                <span>Dimensions</span>
+                                <strong id="finalDim">0 x 0 px</strong>
+                            </div>
+                            <div class="stat-box">
+                                <span>Format</span>
+                                <strong id="finalFormat">JPG</strong>
+                            </div>
+                        </div>
+                        <a id="downloadBtn" class="download-btn"><i class="fa-solid fa-download"></i> Download Image</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Middle Ad Slot -->
+        <div class="ad-container middle-ad">
+            <div class="ad-placeholder">AdSense In-Article Ad (Responsive)</div>
+        </div>
+
+        <!-- SEO Article -->
+        <section class="seo-article">
+            <h2>How to use Pixizer's Advanced Resizer</h2>
+            <p>Welcome to Pixizer's free online image resizer. Whether you need to resize by exact pixels, physical units (cm, mm, inches) for printing, or scale an image by percentage, this tool handles it all.</p>
+            
+            <h3>Understanding Resizing Modes</h3>
+            <ul>
+                <li><strong>By Size (Pixels/CM/Inches):</strong> Best for specific requirements. Exam portals usually require pixels (px). If you are preparing a document for print, select Centimeters (cm) or Inches. Our tool automatically converts physical units to digital pixels using standard web 96 DPI.</li>
+                <li><strong>As Percentage:</strong> The easiest way to maintain your photo's aspect ratio. Select "As Percentage" and type 50% to perfectly halve your image size without stretching or distorting it.</li>
+                <li><strong>Smart Compression:</strong> Enter your target KB size. Our algorithm will compress the JPG or WebP image to fit under that limit.</li>
+            </ul>
+
+            <h3>100% Privacy Guaranteed</h3>
+            <p>Unlike other tools that upload your personal photos to their servers, Pixizer works entirely inside your web browser using HTML5 Canvas technology. Your files are never uploaded, ensuring total privacy and security.</p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Pixizer. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <!-- Correct path to your root script.js file -->
+    <script src="/script.js"></script>
+</body>
+</html>
