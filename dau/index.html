@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <!-- We're using Tailwind CSS for beautiful styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        /* Confetti Animation Elements */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        /* Frosted Glass Effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center py-10 px-4">
+    <!-- Background Confetti Container -->
+    <div id="confetti-container" class="absolute inset-0 pointer-events-none z-0"></div>
+
+    <!-- Main Content Panel -->
+    <div class="glass-panel w-full max-w-4xl p-8 shadow-2xl text-center z-10 mt-8">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-pink-600 mb-4 drop-shadow-md">
+            Happy Birthday !
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-800 mb-8 font-medium">
+            To the most utter Bullshit daughter ever .
+        </p>
+
+        <!-- Photo Gallery Section -->
+        <div class="my-8">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-6">USSIB Moments </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                
+                <!-- Photo 1 -->
+                <div class="bg-white p-3 rounded-xl shadow-lg transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
+                    <!-- CHANGE THE 'src' ATTRIBUTE BELOW TO ADD YOUR OWN PICTURE -->
+                    <img src="pic1.jpg" alt="Memory 1" class="rounded-lg w-full h-48 object-cover">
+                    <p class="text-sm text-gray-500 mt-3 font-semibold"></p>
+                </div>
+                
+                <!-- Photo 2 -->
+                <div class="bg-white p-3 rounded-xl shadow-lg transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
+                    <!-- CHANGE THE 'src' ATTRIBUTE BELOW TO ADD YOUR OWN PICTURE -->
+                    <img src="pic2.jpg" alt="Memory 2" class="rounded-lg w-full h-48 object-cover">
+                    <p class="text-sm text-gray-500 mt-3 font-semibold"></p>
+                </div>
+                
+                <!-- Photo 3 -->
+                <div class="bg-white p-3 rounded-xl shadow-lg transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
+                    <!-- CHANGE THE 'src' ATTRIBUTE BELOW TO ADD YOUR OWN PICTURE -->
+                    <img src="pic3.jpg" alt="Memory 3" class="rounded-lg w-full h-48 object-cover">
+                    <p class="text-sm text-gray-500 mt-3 font-semibold"></p>
+                </div>
+
+            </div>
+            <p class="text-sm text-gray-700 mt-6 italic"></p>
+        </div>
+
+        <!-- Personal Message Section -->
+        <div class="bg-white/70 p-8 rounded-2xl text-left mt-10 shadow-inner">
+            <h3 class="text-2xl font-bold text-pink-600 mb-4">A special message for you...</h3>
+            <p class="text-gray-800 text-lg leading-relaxed font-medium">
+                Dear Goose, <br><br>
+                Wishing you the happiest of birthdays today! Thank you for being such an incredible ex daughter. Let's make this year even better than the last. I'm so glad we get to celebrate you today. Have a fantastic day!
+                <br><br>
+                With love,<br>
+                ex Father
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript to generate falling confetti -->
+    <script>
+        const colors = ['#fbc2eb', '#a6c1ee', '#ff9a9e', '#fecfef', '#fdfbfb', '#ffecd2', '#fcb69f', '#ffb199'];
+        const container = document.getElementById('confetti-container');
+        const numConfetti = 100;
+
+        for (let i = 0; i < numConfetti; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            
+            // Randomize position, color, and animation speed
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            confetti.style.animationDelay = Math.random() * 5 + 's';
+            
+            // Randomize shapes (circles, squares, rectangles)
+            const shape = Math.random();
+            if (shape < 0.33) {
+                confetti.style.borderRadius = '50%';
+            } else if (shape < 0.66) {
+                confetti.style.width = '12px';
+                confetti.style.height = '6px';
+            }
+            container.appendChild(confetti);
+        }
+    </script>
+</body>
+</html>
